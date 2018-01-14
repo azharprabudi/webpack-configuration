@@ -1,0 +1,43 @@
+Mempelajari struktur folder di webpack, artikel dapat dibaca disini:
+
+https://www.sitepoint.com/organize-large-react-application/
+
+Point point yang telah didapatkan ketika membaca artikel tersebut yaitu:
+
+1. Dalam folder proyek harus terdapat folder:
+a. build => hasil bundle webpack disimpan disini
+b. scripts => konfigurasi mengenai scripts yang ingin dijalankan ditaruh disini
+c. src => kodingan utama harus taruh disini
+d. test => berisikan file untuk melakukan unit test
+e. webpack => konfigurasi webpack taruh disini
+
+* semua file yang berada di root folder hanyalah file yang memiliki nama depan tanda titik (contoh .babelrc) dan index.html
+
+2. dalam folder src terdapat dua jenis folder yaitu: 
+a. folder core => berisikan file umum atau komponen yang sering digunakan
+contoh seperti file berisikan code link api, variabel global dll
+b. folder kategori => misalkan kategori untuk menu keranjang, maka akan memiliki file list keranjang dan item keranjang dan penulisan file dibuat seperti ini
+
+// cart/item.js
+// cart/list.js
+// import List from './cart/list' (correct)
+// import ListCart from './car/list-cart' (incorrect)
+
+3. penulisan nama file dibiasakan menggunakan huruf kecil semua dan memiliki dash apabila lebih dari satu kata (contoh list-cart)
+
+4. satu komponen satu file
+
+5. harus bisa memisahkan file pintar dan sampah
+pintar => memanipulasi sebuah data, terkoneksi dengan redux 
+dumb => komponen yang diberikan props dan hanya menampilkan di render
+
+6. hindarkan pengunaan render dengan line code yang panjang
+
+7. selalu gunakan prop-type
+
+8. apabila menggunakan redux harus baca ducks
+hasil apa yang telah di pahami di ducks bahwa, 1 file redux berisikan
+
+reducer => functionnya di export default
+action => functionnya di export biasa
+action_type => nama variabel tidak perlu di export
