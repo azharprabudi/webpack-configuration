@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
 var PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -18,28 +17,27 @@ var plugins = PRODUCTION
             new webpack.HotModuleReplacementPlugin()
         ]
 
-var loaders = PRODUCTION
-    ?   []
-    :   [
-            {
-                test: /\.js$/,
-                exclude: '/node_modules/',//pengecualian
-                loaders: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'stage-0', 'react']
-                }
-            }
-        ]
-
 module.exports =  {
     entry: entry,
     plugins: plugins,
     module: {
-        loaders: loaders
+        loaders: [
+            {
+                test: /\.js$/,
+                loaders: ['babel-loader'],
+                exclude: /node-modules/,
+            },
+            {
+                test: /\.(jpg|png|gif)$/,
+                loaders: ['file-loader'],
+                exclude: /node-modules/
+            }
+        ]
     },
     output: {
-        path: path.resolve(__dirname, '../build'),
-        publicPath: '/build/', //agar bisa di akses ketika live di vps / hosting
+        path: path.resolve(__dirname, '../build/js/'),
+        publicPath: '/build/js/', //agar bisa di akses ketika live di vps / hosting
         filename: 'bundle.js'
-    }
+    },
+    devtool: 'source-map'
 };
