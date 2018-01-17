@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
 var PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -25,24 +26,26 @@ module.exports =  {
             {
                 test: /\.js$/,
                 loaders: ['babel-loader'],
-                exclude: /node-modules/,
+                exclude: /node_modules/,
             },
             {
                 test: /\.(jpg|png|gif)$/,
-                loaders: ['url-loader?limit=10000&name=images/[hash:12].[ext]'],
-                exclude: /node-modules/,
+                loaders: ['url-loader?limit=10000&name=../images/[hash:12].[ext]'],
+                exclude: /node_modules/,
             },
-            {
-                test: /\.scss$$/,
-                loaders: ['style-loader'],
-                exclude: /node-modules/
-            }
         ]
     },
+    plugins: [ 
+        new HtmlWebpackPlugin({
+            title: 'Belajar webpack',
+            hash: true,
+            filename: '../../index.html'
+        }) 
+    ],
     output: {
-        path: path.resolve(__dirname, '../build/'),
-        publicPath: '/build/', //agar bisa di akses ketika live di vps / hosting
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, '../build/js/'),
+        publicPath: '/build/js/', //agar bisa di akses ketika live di vps / hosting
+        filename: PRODUCTION ? '[hash:12].js' : 'bundle.js'
     },
     devtool: 'source-map'
 };

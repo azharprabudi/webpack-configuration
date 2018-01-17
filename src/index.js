@@ -11,7 +11,9 @@ class Index extends Component {
         return (
             <div>
                 <div>
-                    <h4>halo semua apa kabar lagi apa gaes cius cius ?</h4>
+                    <h4>
+                        halo semua apa kabar lagi apa gaes cius cius ?
+                    </h4>
                 </div>
                 <img src={goku} alt="goku"/>
             </div>
