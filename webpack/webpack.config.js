@@ -29,14 +29,19 @@ module.exports =  {
             },
             {
                 test: /\.(jpg|png|gif)$/,
-                loaders: ['file-loader'],
+                loaders: ['url-loader?limit=10000&name=images/[hash:12].[ext]'],
+                exclude: /node-modules/,
+            },
+            {
+                test: /\.scss$$/,
+                loaders: ['style-loader'],
                 exclude: /node-modules/
             }
         ]
     },
     output: {
-        path: path.resolve(__dirname, '../build/js/'),
-        publicPath: '/build/js/', //agar bisa di akses ketika live di vps / hosting
+        path: path.resolve(__dirname, '../build/'),
+        publicPath: '/build/', //agar bisa di akses ketika live di vps / hosting
         filename: 'bundle.js'
     },
     devtool: 'source-map'
